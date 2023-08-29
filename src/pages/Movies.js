@@ -1,21 +1,24 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import React from 'react';
+// import MovieDetails from './MovieDetails';
 
 const Movies = () => {
-useEffect(() => {
-  // Find for input
-},[])
+  // const [films, setFilms] = useState([]);
+  useEffect(() => {
+    // Find for input
+  }, []);
 
+  
   return (
     <div>
-      <input />
-      <div>
-    {['film-1', 'film-2', 'film-3'].map(film => {
-      return <Link key={film} to={`${film}`}>{film}</Link>; 
-    })}
-  </div>
+      <form >
+        <input className="input"
+          name="query"
+          type="text" />
+        <button type="submit">Search</button>
+      </form>
+      {/* <MovieDetails/> */}
     </div>
-    
   );
 };
 
