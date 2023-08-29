@@ -1,21 +1,36 @@
-import { useEffect } from "react";
+import { getFilm } from "components/api-movie";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import MovieDetails from "./MovieDetails";
+// import { getFilm } from "components/api-movie";
+
 
 const Home = () =>{
-
+const [films, setFilms] = useState([]);
 
 useEffect(() => {
-  // HTTP find Films
+  const loadFilm = async () =>{
+    try{
+      const filmData = await getFilm() 
+      setFilms(filmData)
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+  loadFilm()
 },[])
 
 return (
-  <div>
-    {['film-1', 'film-2', 'film-3', 'film-4'].map(film => {
-      return <Link key={film} to={`${film}`}>{film}</Link>; 
-    })}
-    {/* <MovieDetails/> */}
-  </div>
+  <div style={{display:'block'}}>
+  {films ? (
+    films.map((film) => (
+      <Link key={film.id} to={`/film/${film.id}`} style={{ display: 'block', margin: '10px 10px' }}>{film.title}</Link>
+    ))
+  ) : (
+    <p>No films available</p>
+  )}
+</div>
 );
 };
 
