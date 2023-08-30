@@ -28,8 +28,19 @@ export async function getFilm() {
   try {
     const SEARCH_URL ='https://api.themoviedb.org/3/search/movie';
     const response = await axios.get(`${SEARCH_URL}?api_key=${BASE_KEY}&query=${query}`);
-    console.log(response.data);
+    
     return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
+ }
+
+ export async function getCast(movieId){
+  try {
+    const CAST_URL = `https://api.themoviedb.org/3/movie/${movieId}/credits`
+    const response = await axios.get(`${CAST_URL}?api_key=${BASE_KEY}`);
+   
+    return response.data;
   } catch (error) {
     console.error(error);
   }

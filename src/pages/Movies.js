@@ -24,6 +24,7 @@ const Movies = () => {
 
   const handleInputChange = event => {
     setQuery(event.target.value);
+    event.target.reset();
   };
 
   const handleSearch = event => {
