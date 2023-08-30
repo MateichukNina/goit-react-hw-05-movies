@@ -10,7 +10,7 @@ const MovieDetails = () => {
   useEffect(() =>{
     const loadDetails = async () =>{
       try{
-        const filmDetails = await getMovieDetails() 
+        const filmDetails = await getMovieDetails(movieId) 
         setMovieDetails(filmDetails)
       }
       catch(error){
@@ -21,26 +21,30 @@ const MovieDetails = () => {
   },[movieId]
   )
 
+  if (!movieDetails) {
+    return <div>Loading...</div>;
+  }
 
-  return <div>
-        
+  return (
+    <div>
       <h2>{movieDetails.title}</h2>
       <p>{movieDetails.overview}</p>
-      {/* Дополнительные детали о фильме */}
     
-    <img alt=''/>
-    <p>Info</p>
-    
-    <ul>
+      <img src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`} alt={movieDetails.title} />
+      <p>Info</p>
+      <ul>
       <li>
-        <Link to="cast">Cast</Link>
+        <Link to={`${movieId}/cast`}>Cast</Link>
       </li>
       <li>
-        <Link to="review">Rewiew</Link>
+        <Link to={`${movieId}/review`}>Rewiew</Link>
       </li>
     </ul>
 <Outlet/>
-    </div>;
+    </div>
+  );
+    
+
 };
 
 export default MovieDetails;
