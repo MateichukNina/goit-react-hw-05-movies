@@ -9,6 +9,7 @@ const Home = () => {
     const loadFilm = async () => {
       try {
         const filmData = await getFilm();
+        
         setFilms(filmData);
       } catch (error) {
         console.log(error);

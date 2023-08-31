@@ -45,3 +45,15 @@ export async function getFilm() {
     console.error(error);
   }
  }
+
+
+ export async function getReview(movieId){
+  try {
+    const REVIEW_URL = `https://api.themoviedb.org/3/movie/${movieId}/reviews`
+    const response = await axios.get(`${REVIEW_URL}?api_key=${BASE_KEY}`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+ }

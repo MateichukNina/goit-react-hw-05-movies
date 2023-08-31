@@ -28,10 +28,11 @@ const MovieDetails = () => {
   return (
     <div>
       <h2>{movieDetails.title}</h2>
-      <p>{movieDetails.overview}</p>
+      
     
       <img src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`} alt={movieDetails.title} />
-      <p>Info</p>
+      <p>{movieDetails.overview}</p>
+      <p>Genres: {movieDetails.genres.map(genre => genre.name).join(", ")}</p>
       <ul>
       <li>
       <Link to={`/movies/${movieId}/cast`}>Cast</Link>
