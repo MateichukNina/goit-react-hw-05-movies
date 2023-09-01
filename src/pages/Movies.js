@@ -65,8 +65,72 @@
 // // };
 
 
+// pizdets
+
+// import React, { useEffect, useState } from 'react';
+// import { getSearchMovie } from 'components/api-movie';
+// import { useSearchParams } from 'react-router-dom';
+
+
+// import { FilmList } from 'components/FilmList';
+
+// const Movies = () => {
+//   const [queryInput, setQueryInput] = useState('');
+//   const [films, setFilms] = useState([]);
+//   const [searchParams, setSearchParams] = useSearchParams();
+ 
+
+//   const inputResult = searchParams.get('searchQuery') ?? '';
+
+//   useEffect(() => {
+//     const loadFilm = async () => {
+//       try {
+//         const filmData = await getSearchMovie(queryInput);
+//         console.log(filmData); 
+//         setFilms(filmData.results);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+//     loadFilm();
+//   }, [queryInput]);
+   
+
+
+//     const updateQuery = evt => {
+//       const searchValue = evt.target.value;
+//        setSearchParams({ searchQuery: searchValue });
+//       // setQueryInput(searchValue);
+//       const searchParam = searchValue !== '' ? { searchQuery: searchValue } : {};
+//       setSearchParams(searchParam);
+//     };
+
+  
+//    const onSubmit =  evt => {
+//      evt.preventDefault();
+     
+//      setQueryInput(inputResult);
+//     }
+  
+
+//   return (
+//     <div>
+//       <form onSubmit={onSubmit}>
+//         <input type="text"
+//          value={queryInput} 
+//          onChange={updateQuery} />
+//         <button type="submit">Search film</button>
+//       </form>
+      
+//       <FilmList films={films}/>
+//     </div>
+//   );
+// };
+
+// export default Movies;
+
 import React, { useEffect, useState } from 'react';
-import { getSearchMovie } from 'components/api-movie';
+ import { getSearchMovie } from 'components/api-movie';
 import { useSearchParams } from 'react-router-dom';
 
 
@@ -75,50 +139,46 @@ import { FilmList } from 'components/FilmList';
 const Movies = () => {
   const [queryInput, setQueryInput] = useState('');
   const [films, setFilms] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
  
 
-  // const inputResult = searchParams.get('searchQuery');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const inputResult = searchParams.get('searchQuery') ?? '';
 
   useEffect(() => {
-    const loadFilm = async () => {
+    const result = async () => {
       try {
-        const filmData = await getSearchMovie(queryInput);
-        console.log(filmData); 
-        setFilms(filmData.results);
+        const result = await getSearchMovie(queryInput);
+        setFilms(result);
       } catch (error) {
         console.log(error);
       }
     };
-    loadFilm();
+
+    result();
   }, [queryInput]);
-   
 
+ 
 
-    const updateQuery = evt => {
-      const searchValue = evt.target.value;
-      setSearchParams({ searchQuery: searchValue });
-      setQueryInput(searchValue);
-    };
+  const updateQuery = evt => {
+    const searchValue = evt.target.value;
 
-  
-   const onSubmit =  evt => {
-     evt.preventDefault();
-     const inputValue = evt.target.querySelector('input[type="text"]').value;
-     setQueryInput(inputValue);
-    }
-  
+    const searchParam = searchValue !== '' ? { searchQuery: searchValue } : {};
+    setSearchParams(searchParam);
+  };
+
+  const onSubmit = evt => {
+    evt.preventDefault();
+
+    setQueryInput(inputResult);
+  };
 
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input type="text"
-         value={queryInput} 
-         onChange={updateQuery} />
-        <button type="submit">Search film</button>
+        <input type="text" value={inputResult} onChange={updateQuery} />
+        <button type="submit">Search</button>
       </form>
-      
-      <FilmList films={films}/>
+      <FilmList films={films} />
     </div>
   );
 };
