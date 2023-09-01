@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import { getFilm } from 'components/api-movie';
+import { FilmList } from 'components/FilmList';
 
 const Home = () => {
   const [films, setFilms] = useState([]);
@@ -22,7 +23,10 @@ const Home = () => {
 
   return (
     <div>
-      {films ? (
+
+<h2>Trending for week</h2>
+<FilmList films={films}/>
+      {/* {films ? (
         films.map(film => (
           <Link
             key={film.id}
@@ -34,7 +38,7 @@ const Home = () => {
         ))
       ) : (
         <p>No films available</p>
-      )}
+      )} */}
     </div>
   );
 };

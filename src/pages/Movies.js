@@ -64,67 +64,27 @@
 // //   );
 // // };
 
-//  const Movies = () =>{
-//   const [query, setQuery] = useState('');
-//   const [findQuery, setFindQuery] = useState([])
-//   const [searchParams, setSearchParams] = useSearchParams();
-//   // const queryInput = searchMovies.get('movieId');
-//   const location = useLocation();
-
-//   const queryInput = searchParams.get('searchQuery') ?? '';
-
-// useEffect(() => {
-//   const loadFilm = async () => {
-//     try {
-//        const filmData = await getSearchMovie(query);
-
-//       setFindQuery(filmData);
-//      } catch (error) {
-//       console.log(error);
-//      }}
-//    loadFilm();
-//  }, [query,]);
-
-// const onSubmit = evt => {
-//     evt.preventDefault();
-
-//     setQuery(queryInput);
-//   };
-
-//   const updateQueryString = evt => {
-//     const searchValue = evt.target.value;
-
-//     const searchParam = searchValue !== '' ? { searchQuery: searchValue } : {};
-//     setSearchParams(searchParam);
-//   };
-
-//   return(
-//     <div>
-//     <form onSubmit={onSubmit}>
-//       <input type="text" value={queryInput} onChange={updateQueryString} />
-//       <button type="submit">Search film</button>
-//     </form>
-//     {/* <MovieList items={queryResult} stateItem={{ from: location }} /> */}
-//   </div>
-//   )
-//   }
-
-//  export default Movies;
 
 import React, { useEffect, useState } from 'react';
 import { getSearchMovie } from 'components/api-movie';
 import { useSearchParams } from 'react-router-dom';
 
+
+import { FilmList } from 'components/FilmList';
+
 const Movies = () => {
   const [queryInput, setQueryInput] = useState('');
   const [films, setFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+ 
+
+  // const inputResult = searchParams.get('searchQuery');
 
   useEffect(() => {
     const loadFilm = async () => {
       try {
         const filmData = await getSearchMovie(queryInput);
-        console.log(filmData)
+        console.log(filmData); 
         setFilms(filmData.results);
       } catch (error) {
         console.log(error);
@@ -132,35 +92,33 @@ const Movies = () => {
     };
     loadFilm();
   }, [queryInput]);
+   
 
-  const onSubmit = evt => {
-    evt.preventDefault();
-    setQueryInput(searchParams.get('searchQuery') ?? '');
-  };
 
-  const updateQuery = evt => {
-    const searchValue = evt.target.value;
-    setSearchParams({ searchQuery: searchValue });
-    setQueryInput(searchValue);
-  };
+    const updateQuery = evt => {
+      const searchValue = evt.target.value;
+      setSearchParams({ searchQuery: searchValue });
+      setQueryInput(searchValue);
+    };
+
+  
+   const onSubmit =  evt => {
+     evt.preventDefault();
+     const inputValue = evt.target.querySelector('input[type="text"]').value;
+     setQueryInput(inputValue);
+    }
+  
 
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input type="text" value={queryInput} onChange={updateQuery} />
+        <input type="text"
+         value={queryInput} 
+         onChange={updateQuery} />
         <button type="submit">Search film</button>
       </form>
-      <ul>
-  {films && films.length > 0 ? (
-    films.map(film => (
-      <li key={film.id}>
-        {film.title} 
-      </li>
-    ))
-  ) : (
-    <p>No films available</p>
-  )}
-</ul>
+      
+      <FilmList films={films}/>
     </div>
   );
 };

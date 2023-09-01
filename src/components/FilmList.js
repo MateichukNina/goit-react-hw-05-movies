@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom";
-// import { Container, CardWrapper, ProductName } from "./ProductList.styled";
+ import { Link } from "react-router-dom";
 
-export const ProductList = ({ products }) => {
+export const FilmList = ({ films }) => {
   return (
-    <div>
-      {products.map((product) => (
-        <li key={product.id}>
-          <Link to={`${product.id}`}>
-            <img src="https://via.placeholder.com/200x100" alt="" />
-            <p>{product.name}</p>
-          </Link>
-        </li>
-      ))}
-    </div>
+    <>
+      <ul>
+        {films && films.length > 0 ? (
+          films.map(film => (
+            <li key={film.id}>
+              <Link to={`/movies/${film.id}`} >
+                {film.original_title}
+              </Link>
+            </li>
+          ))
+        ) : (
+          <p>No films available</p>
+        )}
+      </ul>
+    </>
   );
 };
