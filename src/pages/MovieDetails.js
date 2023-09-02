@@ -1,11 +1,13 @@
 import { getMovieDetails } from "components/api-movie";
-import { useEffect, useState } from "react";
-import {useParams, Link, Outlet} from "react-router-dom"
+import { useEffect, useState, useRef} from "react";
+import {useParams, Link, Outlet, useLocation} from "react-router-dom"
 
 
 const MovieDetails = () => {
   const {movieId} = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const location = useLocation();
+  const backLinkLocation = useRef(location.state?.from ?? '/');
 
   useEffect(() =>{
     const loadDetails = async () =>{
@@ -27,6 +29,7 @@ const MovieDetails = () => {
 
   return (
     <div>
+      <Link to={backLinkLocation.current}>Back to page</Link>
       <h2>{movieDetails.title}</h2>
       
     

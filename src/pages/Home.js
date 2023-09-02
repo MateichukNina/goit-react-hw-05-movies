@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { getFilm } from 'components/api-movie';
 import { FilmList } from 'components/FilmList';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
   const [films, setFilms] = useState([]);
+  const location = useLocation()
 
   useEffect(() => {
     const loadFilm = async () => {
@@ -25,7 +27,7 @@ const Home = () => {
     <div>
 
 <h2>Trending for week</h2>
-<FilmList films={films}/>
+<FilmList films={films} state={{ from: location }}/>
       {/* {films ? (
         films.map(film => (
           <Link

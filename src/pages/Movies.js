@@ -131,7 +131,7 @@
 
 import React, { useEffect, useState } from 'react';
  import { getSearchMovie } from 'components/api-movie';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 
 
 import { FilmList } from 'components/FilmList';
@@ -139,7 +139,7 @@ import { FilmList } from 'components/FilmList';
 const Movies = () => {
   const [queryInput, setQueryInput] = useState('');
   const [films, setFilms] = useState([]);
- 
+  const location = useLocation();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const inputResult = searchParams.get('searchQuery') ?? '';
@@ -178,7 +178,7 @@ const Movies = () => {
         <input type="text" value={inputResult} onChange={updateQuery} />
         <button type="submit">Search</button>
       </form>
-      <FilmList films={films} />
+      <FilmList films={films} state={{ from: location }} />
     </div>
   );
 };
