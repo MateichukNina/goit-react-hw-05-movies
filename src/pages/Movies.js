@@ -145,7 +145,10 @@ const Movies = () => {
   const inputResult = searchParams.get('searchQuery') ?? '';
 
   useEffect(() => {
+    setQueryInput(inputResult);
     const result = async () => {
+      
+
       try {
         const result = await getSearchMovie(queryInput);
         setFilms(result);
@@ -155,7 +158,7 @@ const Movies = () => {
     };
 
     result();
-  }, [queryInput]);
+  }, [queryInput, inputResult]);
 
  
 

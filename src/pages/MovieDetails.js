@@ -15,6 +15,7 @@ const MovieDetails = () => {
       try{
         const filmDetails = await getMovieDetails(movieId) 
         setMovieDetails(filmDetails)
+       
       }
       catch(error){
         console.log(error)
@@ -23,7 +24,7 @@ const MovieDetails = () => {
     loadDetails();
   },[movieId]
   )
-
+  console.log(location)
   if (!movieDetails) {
     return <div>Loading...</div>;
   }

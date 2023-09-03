@@ -1,5 +1,5 @@
-import { Outlet, NavLink } from 'react-router-dom';
-import { Container, NavList, NavHeader } from './Layout.styled';
+import { Outlet} from 'react-router-dom';
+import { Container, NavList, NavHeader, NavLinkItem } from './Layout.styled';
 
 
 export const Layout = () => {
@@ -9,11 +9,11 @@ export const Layout = () => {
       <NavHeader>
         <NavList>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLinkItem to="/">Home</NavLinkItem >
           </li>
           <li>
             {' '}
-            <NavLink to="/movies">Movies</NavLink>
+            <NavLinkItem  to="/movies">Movies</NavLinkItem >
           </li>
         </NavList>
       </NavHeader>
