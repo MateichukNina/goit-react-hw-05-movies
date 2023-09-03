@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom";
+import { List, Item } from "./FilmList.styled";
 
 export const FilmList = ({ films }) => {
   return (
     <>
-      <ul>
+      <List>
         {films && films.length > 0 ? (
           films.map(film => (
-            <li key={film.id}>
+            <Item key={film.id}>
               <Link to={`/movies/${film.id}`} >
                 {film.original_title}
               </Link>
-            </li>
+            </Item>
           ))
         ) : (
           <p>No films available</p>
         )}
-      </ul>
+      </List>
     </>
   );
 };
