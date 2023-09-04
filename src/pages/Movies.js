@@ -137,17 +137,21 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import { FilmList } from 'components/FilmList';
 
 const Movies = () => {
-  const [queryInput, setQueryInput] = useState('');
+  
   const [films, setFilms] = useState([]);
   const location = useLocation();
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const [queryInput, setQueryInput] = useState(searchParams.get('searchQuery') ?? '');
   const inputResult = searchParams.get('searchQuery') ?? '';
 
   useEffect(() => {
-    setQueryInput(inputResult);
+    
     const result = async () => {
-      
+      if (!inputResult) {
+        setQueryInput([]);
+        return;
+      }
 
       try {
         const result = await getSearchMovie(queryInput);
@@ -174,6 +178,8 @@ const Movies = () => {
 
     setQueryInput(inputResult);
   };
+
+  console.log(location);
 
   return (
     <div>

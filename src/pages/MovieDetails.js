@@ -10,6 +10,8 @@ const MovieDetails = () => {
   const location = useLocation();
   const backLinkLocation = useRef(location.state?.from ?? '/');
 
+  
+
   useEffect(() =>{
     const loadDetails = async () =>{
       try{
@@ -24,11 +26,13 @@ const MovieDetails = () => {
     loadDetails();
   },[movieId]
   )
-  console.log(location)
+
   if (!movieDetails) {
     return <div>Loading...</div>;
   }
 
+
+  console.log(location);
   return (
     <div>
       <Link to={backLinkLocation.current}>Back to page</Link>
