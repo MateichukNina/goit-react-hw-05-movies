@@ -31,8 +31,7 @@ const MovieDetails = () => {
     return <div>Loading...</div>;
   }
 
-
-  console.log(location);
+  
   return (
     <div>
       <Link to={backLinkLocation.current}>Back to page</Link>
