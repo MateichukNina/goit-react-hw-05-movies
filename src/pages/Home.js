@@ -27,6 +27,8 @@ const Home = () => {
     <div>
 
 <h2>Trending for week</h2>
+
+
 <FilmList films={films} state={{ from: location }}/>
       {/* {films ? (
         films.map(film => (

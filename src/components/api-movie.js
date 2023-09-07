@@ -24,10 +24,10 @@ export async function getFilm() {
   }
  }
 
- export async function getSearchMovie(query){
+ export async function getSearchMovie(query, page){
   try {
     const SEARCH_URL ='https://api.themoviedb.org/3/search/movie';
-    const response = await axios.get(`${SEARCH_URL}?api_key=${BASE_KEY}&query=${query}`);
+    const response = await axios.get(`${SEARCH_URL}?api_key=${BASE_KEY}&query=${query}&page=${page}`);
     
     return response.data.results;
   } catch (error) {
