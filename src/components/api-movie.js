@@ -30,6 +30,7 @@ export async function getFilm() {
     const response = await axios.get(`${SEARCH_URL}?api_key=${BASE_KEY}&query=${query}&page=${page}`);
     
     return response.data.results;
+    
   } catch (error) {
     console.error(error);
   }

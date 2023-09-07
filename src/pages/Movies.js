@@ -40,8 +40,10 @@ const Movies = () => {
 
       try {
         const result = await getSearchMovie(queryInput, currentPage);
+        console.log("API Response:", result);
         setFilms(result);
         setTotalPages(result.total_pages);
+        
       } catch (error) {
         console.log(error);
       }
@@ -52,6 +54,7 @@ const Movies = () => {
   }, [queryInput, inputResult, currentPage]);
 
   const handlePageChange = newPage => {
+   
     setCurrentPage(newPage);
   };
 
@@ -78,6 +81,7 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
+      {FilmList && ( 
       <PaginationContainer>
         <PaginationBtn
           onClick={() => handlePageChange(currentPage - 1)}
@@ -93,6 +97,23 @@ const Movies = () => {
           Next
         </PaginationBtn>
       </PaginationContainer>
+    )}
+
+      {/* <PaginationContainer>
+        <PaginationBtn
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Back
+        </PaginationBtn>
+        <span>Page {currentPage} из {totalPages}</span>
+        <PaginationBtn
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </PaginationBtn>
+      </PaginationContainer> */}
 
       <FilmList films={films} state={{ from: location }} />
 
