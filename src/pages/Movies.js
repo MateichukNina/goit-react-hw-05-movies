@@ -40,8 +40,8 @@ const Movies = () => {
 
       try {
         const result = await getSearchMovie(queryInput, currentPage);
-        console.log("API Response:", result);
-        setFilms(result);
+        console.log("API Response:", result.total_pages);
+        setFilms(result.results);
         setTotalPages(result.total_pages);
         
       } catch (error) {
@@ -81,7 +81,7 @@ const Movies = () => {
         <button type="submit">Search</button>
       </form>
 
-      {FilmList && ( 
+      {totalPages > 1 && ( 
       <PaginationContainer>
         <PaginationBtn
           onClick={() => handlePageChange(currentPage - 1)}

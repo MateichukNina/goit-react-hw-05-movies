@@ -29,7 +29,7 @@ export async function getFilm() {
     const SEARCH_URL ='https://api.themoviedb.org/3/search/movie';
     const response = await axios.get(`${SEARCH_URL}?api_key=${BASE_KEY}&query=${query}&page=${page}`);
     
-    return response.data.results;
+    return response.data;
     
   } catch (error) {
     console.error(error);
