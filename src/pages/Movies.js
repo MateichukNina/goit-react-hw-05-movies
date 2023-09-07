@@ -33,7 +33,7 @@ const Movies = () => {
 
   useEffect(() => {
     const result = async () => {
-      if (!inputResult) {
+      if (!queryInput) {
         setQueryInput([]);
         return;
       }
