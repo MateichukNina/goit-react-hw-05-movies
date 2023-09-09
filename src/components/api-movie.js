@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'https://api.themoviedb.org/3/trending/movie/day';
 
 const BASE_KEY = '2a66042f8789a7474bdd30506eef80e1';
-
+const URL = 'https://api.themoviedb.org/3'
 
 
 export async function getFilm() {
@@ -16,8 +16,8 @@ export async function getFilm() {
 }
  export async function getMovieDetails(movieId){
   try {
-    const DETAIL_URL = `https://api.themoviedb.org/3/movie/${movieId}`;
-    const response = await axios.get(`${DETAIL_URL}?api_key=${BASE_KEY}`);
+    const DETAIL_URL = `/movie/${movieId}`;
+    const response = await axios.get(`${URL + DETAIL_URL}?api_key=${BASE_KEY}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -26,8 +26,8 @@ export async function getFilm() {
 
  export async function getSearchMovie(query, page){
   try {
-    const SEARCH_URL ='https://api.themoviedb.org/3/search/movie';
-    const response = await axios.get(`${SEARCH_URL}?api_key=${BASE_KEY}&query=${query}&page=${page}`);
+    const SEARCH_URL ='/search/movie';
+    const response = await axios.get(`${URL + SEARCH_URL}?api_key=${BASE_KEY}&query=${query}&page=${page}`);
     
     return response.data;
     

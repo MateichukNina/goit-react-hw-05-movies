@@ -15,7 +15,8 @@ const MovieDetails = () => {
   useEffect(() =>{
     const loadDetails = async () =>{
       try{
-        const filmDetails = await getMovieDetails(movieId) 
+        const filmDetails = await getMovieDetails(movieId)
+        
         setMovieDetails(filmDetails)
        
       }

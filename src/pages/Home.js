@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const loadFilm = async () => {
       try {
-        const filmData = await getFilm();
+        const filmData = await getFilm()
         
         setFilms(filmData);
       } catch (error) {

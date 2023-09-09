@@ -40,9 +40,8 @@ const Movies = () => {
 
       try {
         const result = await getSearchMovie(queryInput, currentPage);
-        console.log("API Response:", result.total_pages);
         setFilms(result.results);
-        setTotalPages(result.total_pages);
+        setTotalPages(result.total_pages)
         
       } catch (error) {
         console.log(error);
